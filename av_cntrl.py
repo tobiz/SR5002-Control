@@ -62,8 +62,7 @@ import os
 
 
 
-#CONFIG_FILE = "/etc/.avc.conf" ;
-CONFIG_FILE = "/home/pjr/workspace/MMS_2_RS232_Control/src/avc_C.conf" ;
+CONFIG_FILE = "/etc/avc.conf" ;
 try:
   fconf = open(CONFIG_FILE, 'r');
 except IOError :
