@@ -30,8 +30,7 @@ import os
 import ConfigParser
 import subprocess
 
-#CONFIG_FILE = "/etc/.avc.conf" ;
-CONFIG_FILE = "/home/pjr/workspace/MMS_2_RS232_Control/src/avc_C.conf" ;
+CONFIG_FILE = "/etc/avc.conf" ;
 
 port = "3333" ;
 host = "" ;
