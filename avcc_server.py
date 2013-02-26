@@ -38,14 +38,10 @@ import os
 import ConfigParser
 import subprocess
 
-#CONFIG_FILE = "/etc/.avc.conf" ;
-#CONFIG_FILE = "/home/pi/bin/avc.conf" ;
-#CONFIG_FILE = "/etc/avc_control/avc.conf" ;
-CONFIG_FILE = "/home/pjr/workspace/MMS_2_RS232_Control/src/avc_S.conf" ;
+CONFIG_FILE = "/etc/avc.conf" ;
 port = "3333" ;
 tmp = "/tmp/avc.txt" ;
 driver = "" ;
-#driver = "/home/pjr/Projects/mms2-cntrl/av_cntrl.py" ;
 
 EXITCODE = 0 ;
 
