@@ -12,4 +12,8 @@ Therefore the commands destined for the the SR5002 do not have to originate on t
 
 It is envisage that the server would be run on an ultra small low power computer such as a Raspberry Pi but the system does not demand this.
 
+This repository has two examples of the configuration file, one for use with the client avc_C.conf, the other avc_S.conf for use with the server.  The .conf file has to be edited for use in a real application.
+
+There currently is no installation method for this code, I'm working on this. As a result it has to be done by copying the files to /usr/bin for the code and /etc for the config files.
+
 This is experimental code at this time.
