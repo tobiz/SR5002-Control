@@ -209,24 +209,24 @@ def call_as_driver (data):
     #
     # Uncomment these to work
     #
-    #ser=serial.Serial(usb_dev, baudrate, rtscts=rtscts, xonxoff=xonxoff, timeout=rdtmout);
-    #ser.open() ;
+    ser=serial.Serial(usb_dev, baudrate, rtscts=rtscts, xonxoff=xonxoff, timeout=rdtmout);
+    ser.open() ;
 
     for i in range (0, nos_params):
        #cmd = '@' + sys.argv[i] + '\r' 
        cmd = '@' + params[i] + '\r'
        print 'Cmd=' + cmd ;    
        #print 'Before write' , time.time() ;
-       #rtn = ser.write(cmd);
+       rtn = ser.write(cmd);
        #print 'After write' , time.time() ;
        time.sleep(wait_t) ;    
        #print 'Before read' , time.time() ;
-       #rd = ser.read(size=8) ;    
+       rd = ser.read(size=8) ;    
        #print 'After read' , time.time() ;
        #print 'rtn=' , rtn ;
        #print 'read rtn=' , rd ;
 
-    #ser.close() ;
+    ser.close() ;
     #sys.exit(0) ;
     return(0)
 
