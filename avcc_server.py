@@ -37,11 +37,18 @@ import sys
 import os
 import ConfigParser
 import subprocess
+import logging
 
 CONFIG_FILE = "/etc/avc.conf" ;
 port = "3333" ;
 tmp = "/tmp/avc.txt" ;
 driver = "" ;
+
+#
+# Set up logging. This results in program name in output
+#
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 EXITCODE = 0 ;
 
@@ -115,6 +122,7 @@ nc_cmd = NC
 input1 = "";
 while input1 != STOPCMD :
 	print "avcc_server: command waiting on input is: ", NC ;
+	logger.info('Server waiting on command input')
 	try:
 		retcode = subprocess.call(nc_cmd, shell=True)
 		if retcode < 0:
