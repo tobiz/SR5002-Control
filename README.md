@@ -16,6 +16,6 @@ This repository has two examples of the configuration file, one for use with the
 
 There currently is no installation method for this code, I'm working on this. As a result it has to be done by copying the files to /usr/bin for the code and /etc for the config files.
 
-The repository now includes Eclipse Project files and pydev   
+The repository now includes Eclipse Project files and pydev    
 
 This is experimental code at this time.
