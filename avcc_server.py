@@ -45,7 +45,7 @@ tmp = "/tmp/avc.txt" ;
 driver = "" ;
 
 #
-# Set up logging. This results in program name in output
+# Set up logging. This results in program name in output 
 #
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
