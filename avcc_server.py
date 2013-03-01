@@ -48,8 +48,8 @@ driver = "" ;
 # Set up logging. This results in program name in output 
 #
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
+logger = logging.getLogger(__name__)  
+ 
 EXITCODE = 0 ;
 
 try:
@@ -58,6 +58,7 @@ except IOError :
 	#Config file does not exist so use defaults
 	conf = "FALSE";
 	print "Config file not found" ;
+	logger.error(' Config file not found. Exit')
 	sys.exit(1) ;
 else:
 	#Config file exist so use it
