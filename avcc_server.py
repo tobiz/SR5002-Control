@@ -38,6 +38,7 @@ import os
 import ConfigParser
 import subprocess
 import logging
+from logging.handlers import SysLogHandler
 
 CONFIG_FILE = "/etc/avc.conf" ;
 port = "3333" ;
@@ -47,8 +48,16 @@ driver = "" ;
 #
 # Set up logging. This results in program name in output 
 #
+head, file_name = os.path.split(sys.argv[0])
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)  
+logger = logging.getLogger(file_name)
+logger.setLevel(logging.INFO)
+syslog = SysLogHandler(address='/dev/log')
+formatter = logging.Formatter('%(name)s: %(levelname)s %(message)s')
+syslog.setFormatter(formatter)
+logger.addHandler(syslog)
+
+#logger = logging.getLogger(__name__)  
  
 EXITCODE = 0 ;
 
@@ -70,12 +79,14 @@ try:
 	port = config.get("Server", "PORT") ;
 except ConfigParser.NoOptionError :
 	print "avcc_server: PORT not specified, default to 3333"
+	logger.info('PORT not specified, default to 3333')
 	port = 3333
 	
 try:
 	tmp = config.get("Server", "TMP")  ;
 except ConfigParser.NoOptionError :
 	print "avcc_serer: TMP not specified, default to /tmp/avc.txt"
+	logger.info('TMP not specified, default to /tmp/avc.txt')
 	tmp = "/tmp/avc.txt"
 	
 try:
@@ -83,6 +94,8 @@ try:
 	
 except ConfigParser.NoOptionError :
 	print "avcc_server: DRIVER not specifed, Error, exit"
+	logger.error('DRIVER not specifed. Exit')
+	
 	exit(1)
 
 	
@@ -96,6 +109,7 @@ try:
 	USE_P = config.get("Server", "USE_P")
 except ConfigParser.NoOptionError :
 	print "avcc_server: USE_P not specified, Error, exit"
+	logger.error('USE_P not specified. Exit')
 	exit(1)
 
 if USE_P == "Y" or USE_P == "y":
@@ -104,6 +118,7 @@ elif USE_P == "N" or USE_P == "n":
 	p_opt = " "
 else:
 	print "avcc_server: USE_P not specified, Error, exit"
+	logger.error('USE_P not specified. Exit')
 	exit(1)
 NC = "netcat -l " + p_opt + port + " > " + tmp	
 
@@ -117,7 +132,8 @@ WAKECMD = "WAKE" ;
 SLEEPCMD = "SLEEP" ;
 
 # netcat server is started and waits to receive data.
-print "Starting Server\n" ;
+print "Starting Server\n" 
+logger.info('Starting server')
 #Set it such that the cycle starts
 nc_cmd = NC
 input1 = "";
@@ -135,7 +151,8 @@ while input1 != STOPCMD :
 	#retcode = os.system (NC) ;
 	if retcode != 0 :
 		# system call failed so exit
-		print "avcc_server: Netcat command failed. Exit, code " + str(retcode);
+		print "avcc_server: Netcat command failed. Exit, code " + str(retcode)
+		logger.error("Netcat command failed. Exit")
 		EXITCODE = retcode ;
 		break ;
 	
@@ -145,6 +162,7 @@ while input1 != STOPCMD :
 	# File should have 1 line with all the SR5002 commands on it separated by space
 	sr5002cmd = SR5002CMD ;
 	print "avcc_server: Received data" ;
+	logger.info("Receiving data")
 	fd = open(tmp, 'r') ;
 	fdata = fd.readline() ;
 	if fdata.count("STOP") != 0 : 
@@ -166,6 +184,7 @@ while input1 != STOPCMD :
 					print >>sys.stderr, "avcc_server: Execution failed:", e
 			#os.system (sr5002cmd)
 		print "avcc_server: STOP command found so exit server" ;
+		logger.info("STOP command found so exit server")
 		EXITCODE = 2 ;
 		break ; 
 	else :
