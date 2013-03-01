@@ -49,7 +49,7 @@ driver = "" ;
 #
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)  
-
+ 
 EXITCODE = 0 ;
 
 try:
