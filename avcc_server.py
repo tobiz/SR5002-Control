@@ -58,6 +58,7 @@ except IOError :
 	#Config file does not exist so use defaults
 	conf = "FALSE";
 	print "Config file not found" ;
+	logger.error('Config file not found. Exit')
 	sys.exit(1) ;
 else:
 	#Config file exist so use it
