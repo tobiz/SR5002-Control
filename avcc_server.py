@@ -48,7 +48,7 @@ driver = "" ;
 # Set up logging. This results in program name in output 
 #
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__) 
+logger = logging.getLogger(__name__)  
 
 EXITCODE = 0 ;
 
